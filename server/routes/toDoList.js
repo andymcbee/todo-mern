@@ -8,6 +8,6 @@ import {
 const router = express.Router();
 
 router.post("/create", createToDoList);
-router.post("/update/:listId", updateListItemStatus);
+router.patch("/update/:listId/:listItemId", updateListItemStatus);
 
 export default router;

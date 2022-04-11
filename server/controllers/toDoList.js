@@ -22,26 +22,34 @@ export const createToDoList = async (req, res) => {
 };
 
 export const updateListItemStatus = async (req, res) => {
-  const { completionStatus, _id } = req.body;
-  //console.log(req.body);
-  //console.log(req.params.listId);
+  //const { completionStatus, _id } = req.body;
+  console.log(req.params);
+  const { listId, listItemId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(req.params.listId)) {
-    return res.status(409).json({ message: "No ID exists that matches" });
-  }
+  console.log(req.body.toDoItems[0].text);
 
-  const existingToDoList = await ToDoList.findOne({ _id: req.params.listId });
+  //const list = await ToDoList.findById(listId);
 
-  //console.log(existingToDoList);
+  const listQuery = {
+    _id: listId,
+  };
 
-  const updatedValue = existingToDoList.toDoItems.filter(
-    (x) => x._id == req.body
-  );
+  const itemID = listItemId;
 
-  console.log(updatedValue);
-
-  try {
-  } catch (error) {
-    res.status(409).json({ message: "Error updating list item" });
-  }
+  const newValue = ToDoList.findOne(listQuery)
+    .then((item) => {
+      const audioIndex = item.toDoItems
+        .map((item) => item.id)
+        .indexOf(listItemId);
+      item.toDoItems[audioIndex] = req.body.toDoItems[0];
+      item.save();
+    })
+    .finally(() => {
+      res.status(201).json({ message: "Updated!" });
+    });
 };
+//this is working...
+
+//I'm sending the data as an array, but I don't need to... send it as an object instead.
+
+//also, for learning purposes, try to turn this into an await/async setup
