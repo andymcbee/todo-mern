@@ -22,34 +22,47 @@ export const createToDoList = async (req, res) => {
 };
 
 export const updateListItemStatus = async (req, res) => {
-  //const { completionStatus, _id } = req.body;
-  console.log(req.params);
   const { listId, listItemId } = req.params;
-
-  console.log(req.body.toDoItems[0].text);
-
-  //const list = await ToDoList.findById(listId);
+  const { text, completionStatus } = req.body.toDoItems;
 
   const listQuery = {
     _id: listId,
   };
 
-  const itemID = listItemId;
+  //Look up entire original list (Including title + all other to do items)
+  const originalList = await ToDoList.findOne(listQuery);
 
-  const newValue = ToDoList.findOne(listQuery)
-    .then((item) => {
-      const audioIndex = item.toDoItems
-        .map((item) => item.id)
-        .indexOf(listItemId);
-      item.toDoItems[audioIndex] = req.body.toDoItems[0];
-      item.save();
-    })
-    .finally(() => {
-      res.status(201).json({ message: "Updated!" });
-    });
+  //map through array of list items within originalList object
+  //and update relevant one while eturning all others unchanged
+  const updatedToDoItem = await originalList.toDoItems.map((item) => {
+    if (item.id === listItemId) {
+      const activeListItem = {
+        text: text,
+        completionStatus: completionStatus,
+        _id: item._id,
+      };
+      return activeListItem;
+    } else {
+      return item;
+    }
+  });
+
+  const completedOjbect = (originalList, updatedToDoItem) => {
+    //console.log(originalList);
+    // console.log(updatedToDoItem);
+    //  console.log(originalList.toDoItems);
+
+    let finalObject = {
+      title: req.body.title,
+      _id: originalList._id,
+      toDoItems: updatedToDoItem,
+    };
+
+    return finalObject;
+  };
+
+  let finalValueReal = await completedOjbect(originalList, updatedToDoItem);
+
+  console.log(finalValueReal);
+  await finalValueReal.save();
 };
-//this is working...
-
-//I'm sending the data as an array, but I don't need to... send it as an object instead.
-
-//also, for learning purposes, try to turn this into an await/async setup

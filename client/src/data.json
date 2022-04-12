@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "listTitle": "Grocery List",
+
+      "toDoItems": [
+        {
+          "text": "Milk",
+          "status": false
+        },
+        {
+          "text": "Eggs",
+          "status": false
+        }
+      ]
+    },
+
+    {
+      "listTitle": "Work Tasks",
+
+      "toDoItems": [
+        {
+          "text": "Get back to Dave",
+          "status": false
+        },
+        {
+          "text": "Plan the spring launch for ",
+          "status": false
+        }
+      ]
+    }
+  ]
+}
