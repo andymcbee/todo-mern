@@ -1,0 +1,22 @@
+.sidebarToDoListSingle {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  margin-bottom: 17px;
+  background-color: red;
+}
+
+.sidebarListTitle {
+  flex: 9;
+}
+
+.sidebarListButtonContainer {
+  flex: 3;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebarListButton {
+  display: flex;
+  align-items: center;
+}

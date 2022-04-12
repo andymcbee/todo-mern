@@ -4,11 +4,14 @@ import "./styles.css";
 
 import React from "react";
 
-export const HomeContentContainer = ({ data }) => {
+export const HomeContentContainer = ({ data, handleSelectCurrentList }) => {
   return (
     <div className="homeContentContainer">
       <div className="homeSidebar">
-        <SidebarToDoLists data={data} />
+        <SidebarToDoLists
+          data={data}
+          handleSelectCurrentList={handleSelectCurrentList}
+        />
       </div>
       <div className="homeMainContent">
         <CurrentToDoList data={data} />
