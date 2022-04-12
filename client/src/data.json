@@ -7,7 +7,7 @@
       "toDoItems": [
         {
           "text": "Milk",
-          "status": false,
+          "status": true,
           "id": "39473093"
         },
         {
@@ -30,7 +30,7 @@
         },
         {
           "text": "Plan the spring launch for ",
-          "status": false,
+          "status": true,
           "id": "sdf9340ld"
         }
       ]
