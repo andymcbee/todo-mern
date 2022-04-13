@@ -11,7 +11,14 @@
 }
 
 .homeMainContent {
-  flex: 9;
+  flex: 5;
+  margin: 25px;
+  padding: 10px;
+  background-color: rgb(195, 195, 195);
+}
+
+.homeContentSpacer {
+  flex: 7;
   margin: 25px;
   padding: 10px;
   background-color: rgb(195, 195, 195);

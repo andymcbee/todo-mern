@@ -1,0 +1,16 @@
+.toDoListItems {
+  display: flex;
+  align-items: center;
+}
+
+.currentToDoListCheckbox {
+  flex: 3;
+}
+
+.currentToDoListItemText {
+  flex: 6;
+}
+
+.currentToDoListButton {
+  flex: 3;
+}

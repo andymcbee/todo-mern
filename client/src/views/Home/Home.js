@@ -5,7 +5,7 @@ import "./styles.css";
 export const Home = ({
   data,
   handleSelectCurrentList,
-  currentToDo,
+  currentToDoList,
   handleListItemStatusChange,
 }) => {
   return (
@@ -13,7 +13,7 @@ export const Home = ({
       <HomeContentContainer
         data={data}
         handleSelectCurrentList={handleSelectCurrentList}
-        currentToDo={currentToDo}
+        currentToDoList={currentToDoList}
         handleListItemStatusChange={handleListItemStatusChange}
       />
     </div>
