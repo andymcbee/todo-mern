@@ -21,48 +21,32 @@ export const createToDoList = async (req, res) => {
   }
 };
 
-export const updateListItemStatus = async (req, res) => {
-  const { listId, listItemId } = req.params;
-  const { text, completionStatus } = req.body.toDoItems;
+export const updateList = async (req, res) => {
+  const { listId } = req.params;
+  const list = req.body;
 
-  const listQuery = {
-    _id: listId,
-  };
+  console.log(listId);
 
-  //Look up entire original list (Including title + all other to do items)
-  const originalList = await ToDoList.findOne(listQuery);
+  if (!mongoose.Types.ObjectId.isValid(listId)) {
+    return res.status(404).send("No post with that id");
+  }
 
-  //map through array of list items within originalList object
-  //and update relevant one while eturning all others unchanged
-  const updatedToDoItem = await originalList.toDoItems.map((item) => {
-    if (item.id === listItemId) {
-      const activeListItem = {
-        text: text,
-        completionStatus: completionStatus,
-        _id: item._id,
-      };
-      return activeListItem;
-    } else {
-      return item;
-    }
-  });
+  try {
+    const updatedList = await ToDoList.findByIdAndUpdate(listId, list, {
+      new: true,
+    });
 
-  const completedOjbect = (originalList, updatedToDoItem) => {
-    //console.log(originalList);
-    // console.log(updatedToDoItem);
-    //  console.log(originalList.toDoItems);
+    res.status(200).json(updatedList);
+  } catch (error) {
+    return res.status(400).send("Error updating");
+  }
+};
 
-    let finalObject = {
-      title: req.body.title,
-      _id: originalList._id,
-      toDoItems: updatedToDoItem,
-    };
-
-    return finalObject;
-  };
-
-  let finalValueReal = await completedOjbect(originalList, updatedToDoItem);
-
-  console.log(finalValueReal);
-  await finalValueReal.save();
+export const getLists = async (req, res) => {
+  try {
+    const lists = await ToDoList.find();
+    res.status(200).json({ data: lists });
+  } catch (error) {
+    res.status(404).json({ message: error });
+  }
 };

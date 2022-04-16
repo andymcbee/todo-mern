@@ -3,18 +3,20 @@ import { HomeContentContainer } from "../../components/HomeContentContainer/Home
 import "./styles.css";
 
 export const Home = ({
-  data,
+  toDoListData,
   handleSelectCurrentList,
   currentToDoList,
   handleListItemStatusChange,
+  NewListData,
 }) => {
   return (
     <div className="home">
       <HomeContentContainer
-        data={data}
+        toDoListData={toDoListData}
         handleSelectCurrentList={handleSelectCurrentList}
         currentToDoList={currentToDoList}
         handleListItemStatusChange={handleListItemStatusChange}
+        NewListData={NewListData}
       />
     </div>
   );

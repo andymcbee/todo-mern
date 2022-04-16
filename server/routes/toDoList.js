@@ -2,12 +2,14 @@ import express from "express";
 
 import {
   createToDoList,
-  updateListItemStatus,
+  updateList,
+  getLists,
 } from "../controllers/toDoList.js";
 
 const router = express.Router();
 
 router.post("/create", createToDoList);
-router.patch("/update/:listId/:listItemId", updateListItemStatus);
+router.patch("/update/:listId/", updateList);
+router.get("/all", getLists);
 
 export default router;

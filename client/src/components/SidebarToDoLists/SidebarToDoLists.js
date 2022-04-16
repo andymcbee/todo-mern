@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { SidebarToDoListSingle } from "../SidebarToDoListSingle/SidebarToDoListSingle";
 import "./styles.css";
-export const SidebarToDoLists = ({ data, handleSelectCurrentList }) => {
-  // console.log(data);
+import { AddNewListModal } from "../AddNewListModal/AddNewListModal";
+export const SidebarToDoLists = ({
+  toDoListData,
+  handleSelectCurrentList,
+  NewListData,
+}) => {
   return (
     <div>
-      <h1 className="sidebarMainTitle">All Lists</h1>
+      <div className="sidebarTopTitleButton">
+        <h1 className="sidebarMainTitle">All Lists</h1>
+        <AddNewListModal NewListData={NewListData} />
+      </div>
 
       <div>
-        {data?.data.map((toDoList) => {
+        {toDoListData?.map((toDoList) => {
           // console.log(toDoList);
           return (
             <SidebarToDoListSingle
-              key={toDoList.id}
+              key={toDoList?.id}
               list={toDoList}
               handleSelectCurrentList={handleSelectCurrentList}
             />

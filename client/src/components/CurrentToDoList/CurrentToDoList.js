@@ -6,11 +6,13 @@ export const CurrentToDoList = ({
   currentToDoList,
   handleListItemStatusChange,
 }) => {
+  console.log("CURRENT TO DO LIOST COMP");
+  console.log(currentToDoList);
   return (
     <div className="CurrentToDoList">
-      <div>{currentToDoList?.listTitle}</div>
+      <div>{currentToDoList?.title}</div>
       <div>
-        {currentToDoList?.toDoItems.map((toDoItem) => {
+        {currentToDoList?.toDoItems?.map((toDoItem) => {
           return (
             <SingleToDoItem
               toDoItem={toDoItem}
